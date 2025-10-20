@@ -135,6 +135,7 @@
 - ✅ ExportFormCSV.tsx - CSV导出表单组件
 - ✅ ExportFormJSON.tsx - JSON导出表单组件
 - ✅ ExportFormSQL.tsx - SQL导出表单组件
+- ✅ ExportFormJSONLine.tsx - JSONL导出表单组件
 
 **编辑器组件:**
 - ✅ QueryEditorStatusBar.tsx - 查询编辑器状态栏组件
@@ -171,8 +172,8 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~104个
-- **迁移进度**: 约57%
+- **已迁移组件数**: ~105个
+- **迁移进度**: 约58%
 - **核心功能迁移**: 99%
 
 ### 🎯 下一步计划
