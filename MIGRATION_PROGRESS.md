@@ -102,6 +102,13 @@
 - ✅ QueryRenameForm.tsx - 查询重命名表单组件
 - ✅ InputPinModal.tsx - PIN输入模态框组件
 - ✅ WorkspaceAvatar.tsx - 工作区头像组件
+- ✅ TableLength.tsx - 表格记录数显示组件
+- ✅ PendingChangesButton.tsx - 待处理更改按钮组件
+
+**模态框组件:**
+- ✅ AddFieldModal.tsx - 字段添加模态框组件
+- ✅ CreateCollectionModal.tsx - 集合创建模态框组件
+- ✅ LoadingSSOModal.tsx - SSO认证加载模态框组件
 
 **基础组件:**
 - ✅ Titlebar.tsx - 标题栏
@@ -132,8 +139,8 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~83个
-- **迁移进度**: 约46%
+- **已迁移组件数**: ~88个
+- **迁移进度**: 约49%
 - **核心功能迁移**: 99%
 
 ### 🎯 下一步计划
