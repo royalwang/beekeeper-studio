@@ -55,6 +55,8 @@
 - ✅ BigQueryForm.tsx - Google BigQuery连接表单
 - ✅ RedisForm.tsx - Redis连接表单
 - ✅ ClickHouseForm.tsx - ClickHouse连接表单
+- ✅ CassandraForm.tsx - Cassandra连接表单
+- ✅ DuckDBForm.tsx - DuckDB连接表单
 - ✅ CommonServerInputs.tsx - 通用服务器输入
 - ✅ CommonIam.tsx - IAM认证组件
 - ✅ CommonAdvanced.tsx - 高级选项组件
@@ -76,6 +78,10 @@
 - ✅ TableIcon.tsx - 动态表格图标组件
 - ✅ SQLTextEditor.tsx - SQL编辑器组件
 - ✅ SidebarSortButtons.tsx - 侧边栏排序按钮组件
+- ✅ StatusBar.tsx - 全局状态栏组件
+- ✅ SidebarLoading.tsx - 侧边栏加载骨架屏组件
+- ✅ ContentPlaceholder.tsx - 内容占位符组件
+- ✅ ContentPlaceholderText.tsx - 文本占位符组件
 
 **基础组件:**
 - ✅ Titlebar.tsx - 标题栏
@@ -106,9 +112,9 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~58个
-- **迁移进度**: 约32%
-- **核心功能迁移**: 98%
+- **已迁移组件数**: ~63个
+- **迁移进度**: 约35%
+- **核心功能迁移**: 99%
 
 ### 🎯 下一步计划
 
