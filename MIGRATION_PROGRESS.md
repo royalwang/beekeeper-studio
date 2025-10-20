@@ -126,6 +126,8 @@
 - ✅ HiddenEntitiesModal.tsx - 隐藏实体管理模态框组件
 - ✅ ConnectionSidebar.tsx - 连接侧边栏组件
 - ✅ WorkspaceSidebar.tsx - 工作区侧边栏组件
+- ✅ ConnectionListItem.tsx - 连接条目组件
+- ✅ AccountStatusButton.tsx - 账户状态按钮组件
 
 **表格视图组件:**
 - ✅ BuilderFilter.tsx - 高级过滤器构建器组件
