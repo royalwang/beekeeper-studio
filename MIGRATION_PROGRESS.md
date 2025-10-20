@@ -51,9 +51,20 @@
 - ✅ SqliteForm.tsx - SQLite连接表单
 - ✅ MongoDBForm.tsx - MongoDB连接表单
 - ✅ OracleForm.tsx - Oracle连接表单
+- ✅ SqlServerForm.tsx - SQL Server连接表单
 - ✅ CommonServerInputs.tsx - 通用服务器输入
 - ✅ CommonIam.tsx - IAM认证组件
 - ✅ CommonAdvanced.tsx - 高级选项组件
+
+**插件系统组件:**
+- ✅ PluginList.tsx - 插件列表组件
+- ✅ PluginPage.tsx - 插件详情页面
+- ✅ IsolatedPluginView.tsx - 隔离插件视图
+
+**UI组件:**
+- ✅ Stepper.tsx - 多步骤表单组件
+- ✅ ToggleFormArea.tsx - 可折叠表单区域
+- ✅ TableListItem.tsx - 表格列表项组件
 
 **基础组件:**
 - ✅ Titlebar.tsx - 标题栏
@@ -84,9 +95,9 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~40个
-- **迁移进度**: 约22%
-- **核心功能迁移**: 85%
+- **已迁移组件数**: ~47个
+- **迁移进度**: 约26%
+- **核心功能迁移**: 90%
 
 ### 🎯 下一步计划
 
