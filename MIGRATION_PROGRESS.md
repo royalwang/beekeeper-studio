@@ -35,8 +35,22 @@
 - ✅ QueryEditorStatusBar.tsx - 编辑器状态栏
 - ✅ ProgressBar.tsx - 进度条
 
+**数据表格组件:**
+- ✅ TableTable.tsx - 主数据表格组件
+- ✅ EditorModal.tsx - 行编辑模态框
+- ✅ RowFilterBuilder.tsx - 行过滤器构建器
+- ✅ ColumnFilterModal.tsx - 列过滤器模态框
+
+**导入/导出组件:**
+- ✅ ImportTable.tsx - 表格导入组件
+- ✅ ExportModal.tsx - 数据导出模态框
+
 **连接组件:**
 - ✅ PostgresForm.tsx - PostgreSQL连接表单
+- ✅ MysqlForm.tsx - MySQL连接表单
+- ✅ SqliteForm.tsx - SQLite连接表单
+- ✅ MongoDBForm.tsx - MongoDB连接表单
+- ✅ OracleForm.tsx - Oracle连接表单
 - ✅ CommonServerInputs.tsx - 通用服务器输入
 - ✅ CommonIam.tsx - IAM认证组件
 - ✅ CommonAdvanced.tsx - 高级选项组件
@@ -70,9 +84,9 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~31个
-- **迁移进度**: 约17%
-- **核心功能迁移**: 80%
+- **已迁移组件数**: ~40个
+- **迁移进度**: 约22%
+- **核心功能迁移**: 85%
 
 ### 🎯 下一步计划
 
