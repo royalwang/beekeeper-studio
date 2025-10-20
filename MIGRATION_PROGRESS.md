@@ -133,6 +133,8 @@
 - ✅ ImportMapper.tsx - 导入数据列映射组件
 - ✅ ImportFile.tsx - 文件导入配置组件
 - ✅ ExportFormCSV.tsx - CSV导出表单组件
+- ✅ ExportFormJSON.tsx - JSON导出表单组件
+- ✅ ExportFormSQL.tsx - SQL导出表单组件
 
 **编辑器组件:**
 - ✅ QueryEditorStatusBar.tsx - 查询编辑器状态栏组件
@@ -169,8 +171,8 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~102个
-- **迁移进度**: 约56%
+- **已迁移组件数**: ~104个
+- **迁移进度**: 约57%
 - **核心功能迁移**: 99%
 
 ### 🎯 下一步计划
