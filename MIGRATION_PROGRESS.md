@@ -53,6 +53,8 @@
 - ✅ OracleForm.tsx - Oracle连接表单
 - ✅ SqlServerForm.tsx - SQL Server连接表单
 - ✅ BigQueryForm.tsx - Google BigQuery连接表单
+- ✅ RedisForm.tsx - Redis连接表单
+- ✅ ClickHouseForm.tsx - ClickHouse连接表单
 - ✅ CommonServerInputs.tsx - 通用服务器输入
 - ✅ CommonIam.tsx - IAM认证组件
 - ✅ CommonAdvanced.tsx - 高级选项组件
@@ -71,6 +73,9 @@
 - ✅ ContextMenu.tsx - 右键菜单组件
 - ✅ ConfirmationModal.tsx - 确认对话框组件
 - ✅ SidebarFolder.tsx - 侧边栏文件夹组件
+- ✅ TableIcon.tsx - 动态表格图标组件
+- ✅ SQLTextEditor.tsx - SQL编辑器组件
+- ✅ SidebarSortButtons.tsx - 侧边栏排序按钮组件
 
 **基础组件:**
 - ✅ Titlebar.tsx - 标题栏
@@ -101,9 +106,9 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~53个
-- **迁移进度**: 约29%
-- **核心功能迁移**: 95%
+- **已迁移组件数**: ~58个
+- **迁移进度**: 约32%
+- **核心功能迁移**: 98%
 
 ### 🎯 下一步计划
 
