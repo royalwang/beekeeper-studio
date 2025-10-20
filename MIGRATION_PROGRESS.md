@@ -138,6 +138,7 @@
 - ✅ ExportFormJSONLine.tsx - JSONL导出表单组件
 - ✅ ExportNotification.tsx - 导出进度通知组件
 - ✅ ExportManager.tsx - 导出管理器组件
+- ✅ ExportModal.tsx - 导出模态框组件
 
 **编辑器组件:**
 - ✅ QueryEditorStatusBar.tsx - 查询编辑器状态栏组件
@@ -174,8 +175,8 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~107个
-- **迁移进度**: 约59%
+- **已迁移组件数**: ~108个
+- **迁移进度**: 约60%
 - **核心功能迁移**: 99%
 
 ### 🎯 下一步计划
