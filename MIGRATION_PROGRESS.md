@@ -61,6 +61,8 @@
 - ✅ LibSQLForm.tsx - LibSQL连接表单
 - ✅ TrinoForm.tsx - Trino连接表单
 - ✅ SurrealDBForm.tsx - SurrealDB连接表单
+- ✅ RedshiftForm.tsx - Amazon Redshift连接表单
+- ✅ SqlAnywhereForm.tsx - SQL Anywhere连接表单
 - ✅ CommonServerInputs.tsx - 通用服务器输入
 - ✅ CommonIam.tsx - IAM认证组件
 - ✅ CommonAdvanced.tsx - 高级选项组件
@@ -92,6 +94,9 @@
 - ✅ SettingsInput.tsx - 设置输入组件
 - ✅ ShortcutHints.tsx - 快捷键提示组件
 - ✅ UpdatePinModal.tsx - PIN更新模态框组件
+- ✅ ColorPicker.tsx - 颜色选择器组件
+- ✅ CreatePinModal.tsx - PIN创建模态框组件
+- ✅ TabWithTable.tsx - 表格标签页组件
 
 **基础组件:**
 - ✅ Titlebar.tsx - 标题栏
@@ -122,8 +127,8 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~73个
-- **迁移进度**: 约40%
+- **已迁移组件数**: ~78个
+- **迁移进度**: 约43%
 - **核心功能迁移**: 99%
 
 ### 🎯 下一步计划
