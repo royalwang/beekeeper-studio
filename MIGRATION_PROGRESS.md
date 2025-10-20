@@ -123,6 +123,7 @@
 - ✅ ConnectionButton.tsx - 连接管理按钮组件
 - ✅ CoreAccountButton.tsx - 核心账户管理按钮组件
 - ✅ PinnedTableList.tsx - 固定表格列表组件
+- ✅ HiddenEntitiesModal.tsx - 隐藏实体管理模态框组件
 
 **表格视图组件:**
 - ✅ BuilderFilter.tsx - 高级过滤器构建器组件
@@ -130,6 +131,8 @@
 **导入/导出组件:**
 - ✅ ImportPreview.tsx - 导入数据预览组件
 - ✅ ImportMapper.tsx - 导入数据列映射组件
+- ✅ ImportFile.tsx - 文件导入配置组件
+- ✅ ExportFormCSV.tsx - CSV导出表单组件
 
 **编辑器组件:**
 - ✅ QueryEditorStatusBar.tsx - 查询编辑器状态栏组件
@@ -166,8 +169,8 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~99个
-- **迁移进度**: 约55%
+- **已迁移组件数**: ~102个
+- **迁移进度**: 约56%
 - **核心功能迁移**: 99%
 
 ### 🎯 下一步计划
