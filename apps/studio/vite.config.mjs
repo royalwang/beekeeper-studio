@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue2';
+import react from '@vitejs/plugin-react';
 import path from 'path'
 import commonjs from 'vite-plugin-commonjs'
 
@@ -13,7 +13,7 @@ import commonjs from 'vite-plugin-commonjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), commonjs()],
+  plugins: [react(), commonjs()],
   base: '/', // Set the base URL for the app
   optimizeDeps: {
     exclude: [
