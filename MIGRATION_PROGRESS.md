@@ -109,6 +109,15 @@
 - ✅ AddFieldModal.tsx - 字段添加模态框组件
 - ✅ CreateCollectionModal.tsx - 集合创建模态框组件
 - ✅ LoadingSSOModal.tsx - SSO认证加载模态框组件
+- ✅ SqlFilesImportModal.tsx - SQL文件导入模态框组件
+- ✅ RenameDatabaseElementModal.tsx - 数据库元素重命名模态框组件
+
+**文本编辑器组件:**
+- ✅ TextEditor.tsx - CodeMirror文本编辑器组件
+- ✅ SQLTextEditor.tsx - SQL文本编辑器组件
+
+**连接组件:**
+- ✅ SnapExternalWarning.tsx - Snap包外部驱动器警告组件
 
 **基础组件:**
 - ✅ Titlebar.tsx - 标题栏
@@ -139,8 +148,8 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~88个
-- **迁移进度**: 约49%
+- **已迁移组件数**: ~91个
+- **迁移进度**: 约50%
 - **核心功能迁移**: 99%
 
 ### 🎯 下一步计划
