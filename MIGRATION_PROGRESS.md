@@ -59,6 +59,8 @@
 - ✅ DuckDBForm.tsx - DuckDB连接表单
 - ✅ FirebirdForm.tsx - Firebird连接表单
 - ✅ LibSQLForm.tsx - LibSQL连接表单
+- ✅ TrinoForm.tsx - Trino连接表单
+- ✅ SurrealDBForm.tsx - SurrealDB连接表单
 - ✅ CommonServerInputs.tsx - 通用服务器输入
 - ✅ CommonIam.tsx - IAM认证组件
 - ✅ CommonAdvanced.tsx - 高级选项组件
@@ -87,6 +89,9 @@
 - ✅ ExternalLink.tsx - 外部链接组件
 - ✅ StatelessSidebarFolder.tsx - 无状态侧边栏文件夹组件
 - ✅ DiffViewer.tsx - 代码差异查看器组件
+- ✅ SettingsInput.tsx - 设置输入组件
+- ✅ ShortcutHints.tsx - 快捷键提示组件
+- ✅ UpdatePinModal.tsx - PIN更新模态框组件
 
 **基础组件:**
 - ✅ Titlebar.tsx - 标题栏
@@ -117,8 +122,8 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~68个
-- **迁移进度**: 约38%
+- **已迁移组件数**: ~73个
+- **迁移进度**: 约40%
 - **核心功能迁移**: 99%
 
 ### 🎯 下一步计划
