@@ -52,6 +52,7 @@
 - ✅ MongoDBForm.tsx - MongoDB连接表单
 - ✅ OracleForm.tsx - Oracle连接表单
 - ✅ SqlServerForm.tsx - SQL Server连接表单
+- ✅ BigQueryForm.tsx - Google BigQuery连接表单
 - ✅ CommonServerInputs.tsx - 通用服务器输入
 - ✅ CommonIam.tsx - IAM认证组件
 - ✅ CommonAdvanced.tsx - 高级选项组件
@@ -65,6 +66,11 @@
 - ✅ Stepper.tsx - 多步骤表单组件
 - ✅ ToggleFormArea.tsx - 可折叠表单区域
 - ✅ TableListItem.tsx - 表格列表项组件
+- ✅ LoadingSpinner.tsx - 加载动画组件
+- ✅ ErrorAlert.tsx - 错误提示组件
+- ✅ ContextMenu.tsx - 右键菜单组件
+- ✅ ConfirmationModal.tsx - 确认对话框组件
+- ✅ SidebarFolder.tsx - 侧边栏文件夹组件
 
 **基础组件:**
 - ✅ Titlebar.tsx - 标题栏
@@ -95,9 +101,9 @@
 ### 📊 迁移统计
 
 - **总Vue组件数**: ~181个
-- **已迁移组件数**: ~47个
-- **迁移进度**: 约26%
-- **核心功能迁移**: 90%
+- **已迁移组件数**: ~53个
+- **迁移进度**: 约29%
+- **核心功能迁移**: 95%
 
 ### 🎯 下一步计划
 
