@@ -1,14 +1,35 @@
 import React from 'react';
 
-const ProgressBar: React.FC = () => {
+interface ProgressBarProps {
+  message?: string;
+  canCancel?: boolean;
+  onCancel?: () => void;
+}
+
+const ProgressBar: React.FC<ProgressBarProps> = ({
+  message = 'loading...',
+  canCancel = true,
+  onCancel
+}) => {
+  const handleCancel = () => {
+    if (onCancel) {
+      onCancel();
+    }
+  };
+
   return (
     <div className="progress-bar">
-      {/* Progress bar content will be implemented here */}
-      <div className="progress-content">
-        <div className="progress-spinner">
-          <div className="spinner"></div>
-        </div>
-        <p>Loading...</p>
+      <div className="flex-col layout-center">
+        <span>{message}</span>
+        {canCancel && (
+          <a
+            onClick={handleCancel}
+            title="Cancel Query Execution (Esc)"
+            className="cancel-query btn btn-flat"
+          >
+            Cancel
+          </a>
+        )}
       </div>
     </div>
   );
