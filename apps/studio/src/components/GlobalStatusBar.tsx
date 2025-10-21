@@ -1,4 +1,5 @@
 import React from 'react';
+import ConnectionButton from './sidebar/core/ConnectionButton';
 
 interface GlobalStatusBarProps {
   connectionButtonWidth: number;
@@ -11,10 +12,16 @@ const GlobalStatusBar: React.FC<GlobalStatusBarProps> = ({
 }) => {
   return (
     <div className="global-status-bar">
-      {/* Global status bar content will be implemented here */}
-      <div className="status-content">
-        <span>Ready</span>
+      <div
+        className="connection-button-wrapper"
+        style={{
+          '--connection-button-icon-width': `${connectionButtonIconWidth}px`,
+          width: `${connectionButtonWidth}px`,
+        } as React.CSSProperties}
+      >
+        <ConnectionButton />
       </div>
+      <div id="global-status-bar" />
     </div>
   );
 };
