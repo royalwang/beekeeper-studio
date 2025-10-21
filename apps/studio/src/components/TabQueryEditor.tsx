@@ -1,127 +1,183 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../store';
-import MergeManager from './editor/MergeManager';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import ResultTable from './editor/ResultTable';
+import ProgressBar from './editor/ProgressBar';
+import ShortcutHints from './editor/ShortcutHints';
+import SQLTextEditor from './common/texteditor/SQLTextEditor';
 import QueryEditorStatusBar from './editor/QueryEditorStatusBar';
+import ErrorAlert from './common/ErrorAlert';
+import MergeManager from './editor/MergeManager';
+import { AppEvent } from '../common/AppEvent';
+import { TransportOpenTab } from '../common/transport/TransportOpenTab';
+import { getVimKeymapsFromVimrc } from '../lib/editor/vim';
 
 interface TabQueryEditorProps {
-  query?: any;
+  query: TransportOpenTab;
+  active: boolean;
   onClose?: () => void;
 }
 
-const TabQueryEditor: React.FC<TabQueryEditorProps> = ({ query, onClose }) => {
-  const dispatch = useDispatch();
+const TabQueryEditor: React.FC<TabQueryEditorProps> = ({ 
+  query, 
+  active, 
+  onClose 
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const topPanelRef = useRef<HTMLDivElement>(null);
-  
-  const [unsavedText, setUnsavedText] = useState(query?.text || '');
-  const [originalText, setOriginalText] = useState(query?.text || '');
-  const [remoteDeleted, setRemoteDeleted] = useState(false);
-  const [isExecuting, setIsExecuting] = useState(false);
+  const bottomPanelRef = useRef<HTMLDivElement>(null);
+  const tableRef = useRef<any>(null);
+
   const [results, setResults] = useState<any[]>([]);
+  const [running, setRunning] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
-  const defaultSchema = useSelector((state: RootState) => state.global.defaultSchema);
-  const wrapText = useSelector((state: RootState) => state.settings.wrapText);
-  const vimConfig = useSelector((state: RootState) => state.settings.vimConfig);
+  const [info, setInfo] = useState<string | null>(null);
+  const [split, setSplit] = useState<any>(null);
+  const [tableHeight, setTableHeight] = useState(0);
+  const [executeTime, setExecuteTime] = useState(0);
+  const [initialized, setInitialized] = useState(false);
+  const [focusingElement, setFocusingElement] = useState('text-editor');
+  const [unsavedText, setUnsavedText] = useState(query.text || '');
+  const [originalText, setOriginalText] = useState(query.text || '');
+  const [remoteDeleted, setRemoteDeleted] = useState(false);
+  const [isTablePanelVisible, setIsTablePanelVisible] = useState(false);
+
+  const usedConfig = useSelector((state: any) => state.connection?.usedConfig);
+  const isCommunity = useSelector((state: any) => state.settings?.isCommunity);
+  const wrapText = useSelector((state: any) => state.settings?.wrapText);
+  const userKeymap = useSelector((state: any) => state.settings?.userKeymap);
+  const vimConfig = useSelector((state: any) => state.settings?.vimConfig);
+  const vimKeymaps = useSelector((state: any) => state.settings?.vimKeymaps);
+  const entities = useSelector((state: any) => state.data?.entities || []);
+  const defaultSchema = useSelector((state: any) => state.connection?.defaultSchema);
+
+  const dialect = usedConfig?.connectionType || '';
+  const formatterDialect = dialect;
+  const identifierDialect = dialect;
+
+  const editor = {
+    value: unsavedText,
+    onChange: setUnsavedText,
+    readOnly: false,
+    markers: [],
+  };
+
+  const editorMarkers = [];
+  const paramTypes = [];
+  const keybindings = [];
+  const columnsGetter = () => [];
+
+  const runningText = running ? 'Running query...' : '';
 
   const keymap = {
-    'general.executeQuery': () => executeQuery(),
-    'general.executeCurrentQuery': () => executeCurrentQuery(),
-    'general.formatQuery': () => formatQuery(),
-    'general.saveQuery': () => saveQuery(),
+    'queryEditor.switchPaneFocus': () => {
+      setFocusingElement(focusingElement === 'text-editor' ? 'table' : 'text-editor');
+    },
+    'queryEditor.runQuery': () => {
+      runQuery();
+    },
+    'queryEditor.runQueryCurrent': () => {
+      runQueryCurrent();
+    },
   };
 
-  const handleTextChange = (newText: string) => {
-    setUnsavedText(newText);
-    // Auto-save logic would go here
-  };
-
-  const executeQuery = async () => {
+  const runQuery = useCallback(async () => {
     if (!unsavedText.trim()) return;
-    
-    setIsExecuting(true);
+
+    setRunning(true);
     setError(null);
-    
+    setInfo(null);
+
     try {
-      // Mock query execution - in real implementation, this would call the backend
+      const startTime = Date.now();
+      
+      // Mock query execution
       console.log('Executing query:', unsavedText);
       
-      // Simulate API call
+      // Simulate query execution
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Mock results
-      const mockResults = [
-        { id: 1, name: 'John Doe', email: 'john@example.com' },
-        { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-      ];
+      const endTime = Date.now();
+      setExecuteTime(endTime - startTime);
       
-      setResults(mockResults);
+      // Mock result
+      const mockResult = {
+        query: unsavedText,
+        rows: [
+          { id: 1, name: 'Sample 1', value: 100 },
+          { id: 2, name: 'Sample 2', value: 200 },
+        ],
+        fields: [
+          { name: 'id', type: 'integer' },
+          { name: 'name', type: 'text' },
+          { name: 'value', type: 'integer' },
+        ],
+        rowCount: 2,
+        executeTime: endTime - startTime,
+      };
+      
+      setResults([mockResult]);
+      setInfo(`Query executed successfully in ${executeTime}ms`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Query execution failed');
+      setError('Query execution failed');
     } finally {
-      setIsExecuting(false);
+      setRunning(false);
     }
-  };
+  }, [unsavedText, executeTime]);
 
-  const executeCurrentQuery = () => {
-    // Execute only the current query (if multiple queries in editor)
-    executeQuery();
-  };
+  const runQueryCurrent = useCallback(async () => {
+    // Mock implementation for running current query
+    console.log('Running current query');
+    await runQuery();
+  }, [runQuery]);
 
-  const formatQuery = () => {
-    // Format the SQL query
-    console.log('Formatting query');
-    // In real implementation, this would use a SQL formatter
-  };
+  const clear = useCallback(() => {
+    setResults([]);
+    setError(null);
+    setInfo(null);
+  }, []);
 
-  const saveQuery = () => {
-    if (query) {
-      // Save the query
-      console.log('Saving query:', unsavedText);
-      setOriginalText(unsavedText);
+  const handleTableClick = useCallback(() => {
+    setFocusingElement('table');
+  }, []);
+
+  const handleTextEditorClick = useCallback(() => {
+    setFocusingElement('text-editor');
+  }, []);
+
+  const handleChange = useCallback((newText: string) => {
+    setUnsavedText(newText);
+  }, []);
+
+  const handleMergeAccepted = useCallback(() => {
+    setOriginalText(unsavedText);
+  }, [unsavedText]);
+
+  const handleClose = useCallback(() => {
+    onClose?.();
+  }, [onClose]);
+
+  useEffect(() => {
+    if (active && !initialized) {
+      setInitialized(true);
     }
-  };
+  }, [active, initialized]);
 
-  const handleMergeAccepted = () => {
-    setOriginalText(query?.text || '');
-  };
+  useEffect(() => {
+    setUnsavedText(query.text || '');
+    setOriginalText(query.text || '');
+  }, [query.text]);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    // Handle keyboard shortcuts
-    if (e.ctrlKey || e.metaKey) {
-      switch (e.key) {
-        case 'Enter':
-          e.preventDefault();
-          executeQuery();
-          break;
-        case 's':
-          e.preventDefault();
-          saveQuery();
-          break;
-        case 'k':
-          e.preventDefault();
-          formatQuery();
-          break;
-      }
-    }
-  };
+  const editorComponent = SQLTextEditor;
 
   return (
-    <div
-      ref={containerRef}
-      className="query-editor"
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-    >
-      <div ref={topPanelRef} className="top-panel">
+    <div className="query-editor" ref={containerRef}>
+      <div className="top-panel" ref={topPanelRef}>
         {query && query.id && (
           <MergeManager
             originalText={originalText}
             query={query}
             unsavedText={unsavedText}
-            onChange={handleTextChange}
+            onChange={handleChange}
             onMergeAccepted={handleMergeAccepted}
           />
         )}
@@ -134,7 +190,7 @@ const TabQueryEditor: React.FC<TabQueryEditorProps> = ({ query, onClose }) => {
                 This query was deleted by someone else. It is no longer editable.
               </div>
               <button
-                onClick={onClose}
+                onClick={handleClose}
                 className="btn btn-flat"
               >
                 Close Tab
@@ -142,93 +198,87 @@ const TabQueryEditor: React.FC<TabQueryEditorProps> = ({ query, onClose }) => {
             </div>
           </div>
         )}
+
+        <SQLTextEditor
+          value={unsavedText}
+          readOnly={editor.readOnly}
+          isFocused={focusingElement === 'text-editor'}
+          markers={editorMarkers}
+          formatterDialect={formatterDialect}
+          identifierDialect={identifierDialect}
+          paramTypes={paramTypes}
+          keybindings={keybindings}
+          vimConfig={vimConfig}
+          lineWrapping={wrapText}
+          keymap={userKeymap}
+          vimKeymaps={vimKeymaps}
+          entities={entities}
+          columnsGetter={columnsGetter}
+          defaultSchema={defaultSchema}
+          onChange={handleChange}
+          onFocus={handleTextEditorClick}
+        />
         
-        <div className="editor-container">
-          <div className="editor-toolbar">
-            <div className="toolbar-group">
-              <button
-                className="btn btn-primary"
-                onClick={executeQuery}
-                disabled={isExecuting || !unsavedText.trim()}
-                title="Execute Query (Ctrl+Enter)"
-              >
-                <i className="material-icons">
-                  {isExecuting ? 'hourglass_empty' : 'play_arrow'}
-                </i>
-                {isExecuting ? 'Executing...' : 'Execute'}
-              </button>
-              
-              <button
-                className="btn btn-secondary"
-                onClick={formatQuery}
-                disabled={!unsavedText.trim()}
-                title="Format Query (Ctrl+K)"
-              >
-                <i className="material-icons">format_align_left</i>
-                Format
-              </button>
-              
-              {query && (
-                <button
-                  className="btn btn-secondary"
-                  onClick={saveQuery}
-                  disabled={unsavedText === originalText}
-                  title="Save Query (Ctrl+S)"
-                >
-                  <i className="material-icons">save</i>
-                  Save
-                </button>
-              )}
-            </div>
-          </div>
-          
-          <div className="editor-content">
-            <textarea
-              className="sql-editor"
-              value={unsavedText}
-              onChange={(e) => handleTextChange(e.target.value)}
-              placeholder="Enter your SQL query here..."
-              style={{
-                width: '100%',
-                height: '300px',
-                fontFamily: 'Monaco, Consolas, "Courier New", monospace',
-                fontSize: '14px',
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                padding: '10px',
-                resize: 'vertical',
-                whiteSpace: wrapText ? 'normal' : 'pre',
-              }}
-            />
-          </div>
+        <span className="expand"></span>
+        <div className="toolbar text-right">
+          <button
+            className="btn btn-primary"
+            onClick={runQuery}
+            disabled={running || !unsavedText.trim()}
+          >
+            <i className="material-icons">play_arrow</i>
+            Run
+          </button>
         </div>
       </div>
-      
-      <div className="bottom-panel">
-        {error && (
-          <div className="error-panel">
-            <div className="alert alert-danger">
-              <i className="material-icons">error</i>
-              <div className="alert-body">
-                <strong>Error:</strong> {error}
-              </div>
-            </div>
-          </div>
+
+      <div className="bottom-panel" ref={bottomPanelRef}>
+        {running && (
+          <ProgressBar
+            canCancel={true}
+            message={runningText}
+            onCancel={() => setRunning(false)}
+          />
         )}
         
-        {results.length > 0 && (
-          <div className="results-panel">
-            <ResultTable results={results} />
+        <ResultTable
+          ref={tableRef}
+          results={results}
+          active={active}
+          onTableClick={handleTableClick}
+          onTextEditorClick={handleTextEditorClick}
+          focusingElement={focusingElement}
+        />
+
+        {error && <ErrorAlert error={error} />}
+        {info && (
+          <div className="alert alert-info">
+            <i className="material-icons">info</i>
+            <div>{info}</div>
           </div>
         )}
-        
-        <QueryEditorStatusBar
-          query={unsavedText}
-          isExecuting={isExecuting}
-          resultsCount={results.length}
-          hasUnsavedChanges={unsavedText !== originalText}
+
+        <MergeManager
+          split={split}
+          onSplitChange={setSplit}
+          splitElements={[topPanelRef.current, bottomPanelRef.current]}
+        />
+
+        <ShortcutHints
+          active={active}
+          keymap={keymap}
         />
       </div>
+
+      <QueryEditorStatusBar
+        tab={query}
+        active={active}
+        results={results}
+        executeTime={executeTime}
+        onTableClick={handleTableClick}
+        onTextEditorClick={handleTextEditorClick}
+        focusingElement={focusingElement}
+      />
     </div>
   );
 };
